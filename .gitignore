@@ -1,3 +1,39 @@
-node_modules
+# debug
+npm-debug.*
+yarn-debug.*
+yarn-error.*
+
+# dependencies
+node_modules/
+
+# Expo
+.expo/
+dist/
+expo-env.d.ts
+web-build/
+
+# local env files
+.env*.local
+
+# macOS
+.DS_Store
+*.pem
+
+# Metro
+.metro-health-check*
+
+# Native
+*.jks
+*.key
+*.mobileprovision
+*.orig.*
+*.p8
+*.p12
+.kotlin/
+
+# typescript
+*.tsbuildinfo
+
 lib
+node_modules
 out-tsc

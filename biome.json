@@ -8,7 +8,7 @@
     },
     "files": {
         "ignoreUnknown": false,
-        "includes": ["**/*", "!package.json"]
+        "includes": ["**/*", "!package.json", "!example/package.json"]
     },
     "formatter": {
         "enabled": true,

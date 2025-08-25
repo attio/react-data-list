@@ -29,6 +29,10 @@ jobs:
       - name: Check TypeScript
         run: bun run check-typescript
 
+      - name: Check Example TypeScript
+        run: bun run check-typescript
+        working-directory: example
+
       - name: Check Biome
         run: bun run check-biome
 

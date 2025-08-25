@@ -41,8 +41,12 @@
         "workspaces"
     ],
     "sortPackages": true,
-    "source": ["package.json"],
+    "source": ["package.json", "example/package.json"],
     "versionGroups": [
+        {
+            "dependencies": ["@types/react", "react"],
+            "policy": "sameRange"
+        },
         {
             "dependencies": ["$LOCAL"],
             "dependencyTypes": ["dev"],

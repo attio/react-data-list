@@ -26,3 +26,23 @@ runs:
     - name: Check for bun.lock changes
       run: git diff --exit-code -- bun.lock
       shell: bash
+
+    - name: Install example dependencies
+      run: |
+        if ! bun install --frozen-lockfile 2>&1 | tee output.txt; then
+          if grep -q "error: lockfile had changes, but lockfile is frozen" output.txt; then
+            echo "::group::Lockfile diff"
+            git diff bun.lock
+            echo "::endgroup::"
+          fi
+          rm output.txt
+          exit 1
+        fi
+        rm output.txt
+      shell: bash
+      working-directory: example
+
+    - name: Check for example bun.lock changes
+      run: git diff --exit-code -- bun.lock
+      shell: bash
+      working-directory: example
