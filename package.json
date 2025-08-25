@@ -49,8 +49,10 @@
     "typescript": "~5.9.2"
   },
   "peerDependencies": {
+    "@attio/react-descendants": "link:@attio/react-descendants",
     "@types/react": "*",
-    "react": "*"
+    "react": "*",
+    "react-error-boundary": "^6.0.0"
   },
   "trustedDependencies": [
     "@biomejs/biome"

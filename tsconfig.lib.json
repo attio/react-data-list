@@ -3,7 +3,8 @@
     "extends": "./config/tsconfig.base.json",
     "display": "Lib",
     "compilerOptions": {
-        "rootDir": "./src",
+        "composite": false,
+        "rootDir": "./",
         "outDir": "./out-tsc/lib",
         "target": "es2020",
         "module": "ESNext",
@@ -11,8 +12,9 @@
         "verbatimModuleSyntax": true,
         "moduleDetection": "force",
         "esModuleInterop": true,
-        "jsx": "react-jsx"
+        "jsx": "react-jsx",
+        "types": ["./types/timers"]
     },
-    "include": ["src"],
+    "include": ["src", "types"],
     "exclude": ["node_modules"]
 }
