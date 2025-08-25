@@ -1,7 +1,7 @@
 /** biome-ignore-all lint/suspicious/noExplicitAny: allow any */
 import type {Descendant} from "@attio/react-descendants"
 
-type Primitive = string | number | boolean | null | undefined
+type Primitive = string | number | boolean | null
 
 /**
  * A simple type alias to help track the list item provided to the row by a
@@ -132,7 +132,7 @@ export interface DataListRendererProps<TRenderItem = any> {
     /**
      * A function that's rendered when the descriptors produce an empty array.
      */
-    renderEmpty?: () => React.ReactElement | null
+    renderEmpty?: (() => React.JSX.Element | null) | null | undefined
 }
 
 /**

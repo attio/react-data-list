@@ -38,6 +38,10 @@
     "check-typescript": "tsc --build --noEmit",
     "clean": "rm -rf lib out-tsc"
   },
+  "dependencies": {
+    "@attio/fetchable": "0.0.1-experimental.5",
+    "react-error-boundary": "^6.0.0"
+  },
   "devDependencies": {
     "@biomejs/biome": "2.2.2",
     "@changesets/cli": "^2.29.6",
@@ -51,8 +55,7 @@
   "peerDependencies": {
     "@attio/react-descendants": "link:@attio/react-descendants",
     "@types/react": "*",
-    "react": "*",
-    "react-error-boundary": "^6.0.0"
+    "react": "*"
   },
   "trustedDependencies": [
     "@biomejs/biome"

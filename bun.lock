@@ -3,6 +3,10 @@
   "workspaces": {
     "": {
       "name": "react-descendants",
+      "dependencies": {
+        "@attio/fetchable": "0.0.1-experimental.5",
+        "react-error-boundary": "^6.0.0",
+      },
       "devDependencies": {
         "@biomejs/biome": "2.2.2",
         "@changesets/cli": "^2.29.6",
@@ -17,7 +21,6 @@
         "@attio/react-descendants": "link:@attio/react-descendants",
         "@types/react": "*",
         "react": "*",
-        "react-error-boundary": "^6.0.0",
       },
     },
   },
@@ -25,6 +28,8 @@
     "@biomejs/biome",
   ],
   "packages": {
+    "@attio/fetchable": ["@attio/fetchable@0.0.1-experimental.5", "", {}, "sha512-MRcnxalpZz4cnnUfAjEtQNYSSzPnOGquoNalu73o2kJjbodcbZj6kK001vQyXN6bkq2uIDOHJtSuY+oe1OI2cQ=="],
+
     "@attio/react-descendants": ["@attio/react-descendants@link:@attio/react-descendants", {}],
 
     "@babel/runtime": ["@babel/runtime@7.28.3", "", {}, "sha512-9uIQ10o0WGdpP6GDhXcdOJPJuDgFtIDtN/9+ArJQ2NAfAmiuhTQdzkaTGR33v43GYS2UrSA0eX2pPPHoFVvpxA=="],
