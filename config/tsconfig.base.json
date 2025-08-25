@@ -1,0 +1,59 @@
+{
+    "$schema": "https://json.schemastore.org/tsconfig",
+    "display": "Base",
+    "compilerOptions": {
+        // Language & Standard Library
+        "composite": true,
+        "lib": [],
+        "alwaysStrict": true,
+        "useDefineForClassFields": true,
+
+        // Module System & Resolution / Interop
+        "resolveJsonModule": true,
+        "isolatedModules": true,
+        "allowJs": true,
+        "checkJs": true,
+
+        // Declarations & Source Artifact Control
+        "declaration": true,
+        "declarationMap": true,
+        "inlineSources": false,
+        "stripInternal": true,
+
+        // Strictness
+        "strict": true,
+        "strictNullChecks": true,
+        "strictFunctionTypes": true,
+        "strictBindCallApply": true,
+        "strictPropertyInitialization": true,
+        "noImplicitAny": true,
+        "noImplicitThis": true,
+        "useUnknownInCatchVariables": true,
+        "noUncheckedIndexedAccess": true,
+        "exactOptionalPropertyTypes": true,
+        "noPropertyAccessFromIndexSignature": true,
+
+        // Control Flow & API Hygiene
+        "noImplicitOverride": true,
+        "noImplicitReturns": true,
+        "noFallthroughCasesInSwitch": true,
+
+        // Dead Code & Reachability
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "allowUnreachableCode": false,
+        "allowUnusedLabels": false,
+
+        // Build Correctness
+        "noEmitOnError": true,
+        "skipLibCheck": false,
+
+        // Filesystem & Stability
+        "forceConsistentCasingInFileNames": true,
+
+        // DX & Diagnostics
+        "pretty": true,
+        "noErrorTruncation": true,
+        "preserveWatchOutput": true
+    }
+}

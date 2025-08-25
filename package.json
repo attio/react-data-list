@@ -1,0 +1,58 @@
+{
+  "private": true,
+  "name": "@attio/react-data-list",
+  "version": "0.0.1",
+  "author": "Braden Marshall <braden1996@hotmail.co.uk>",
+  "license": "MIT",
+  "bugs": "https://github.com/attio/react-data-list/issues",
+  "homepage": "https://github.com/attio/react-data-list",
+  "repository": "attio/react-data-list.git",
+  "type": "module",
+  "files": [
+    "lib"
+  ],
+  "exports": {
+    "./package.json": "./package.json",
+    ".": {
+      "types": "./lib/index.d.ts",
+      "import": "./lib/index.js",
+      "react-native": "./lib/index.js",
+      "default": "./lib/index.cjs"
+    }
+  },
+  "engines": {
+    "bun": ">=1.2.21"
+  },
+  "packageManager": "bun@1.2.21",
+  "scripts": {
+    "build": "tsup --tsconfig tsconfig.lib.json",
+    "changeset-publish": "bun run build-release && changeset publish",
+    "changeset-version": "changeset version && bun run format-fix",
+    "check": "bun run check-typescript && bun run check-biome && bun run check-syncpack && bun run check-cspell",
+    "check-biome": "biome check",
+    "check-cspell": "cspell . --quiet",
+    "check-fix": "bun run check-typescript && bun run check-fix-biome && bun run check-fix-syncpack && bun run check-cspell",
+    "check-fix-biome": "biome check --write",
+    "check-fix-syncpack": "syncpack format --log-levels error && syncpack lint",
+    "check-syncpack": "syncpack format --log-levels error --check && syncpack lint",
+    "check-typescript": "tsc --build --noEmit",
+    "clean": "rm -rf lib out-tsc"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.2.2",
+    "@changesets/cli": "^2.29.6",
+    "@swc/core": "^1.13.5",
+    "@types/node": "^24.3.0",
+    "@types/react": "*",
+    "cspell": "^9.2.0",
+    "syncpack": "14.0.0-alpha.19",
+    "tsup": "^8.5.0",
+    "typescript": "~5.9.2"
+  },
+  "peerDependencies": {
+    "react": "*"
+  },
+  "trustedDependencies": [
+    "@biomejs/biome"
+  ]
+}

@@ -1,0 +1,65 @@
+{
+    "$schema": "node_modules/@biomejs/biome/configuration_schema.json",
+    "vcs": {
+        "enabled": true,
+        "clientKind": "git",
+        "defaultBranch": "master",
+        "useIgnoreFile": true
+    },
+    "files": {
+        "ignoreUnknown": false,
+        "includes": ["**/*", "!package.json"]
+    },
+    "formatter": {
+        "enabled": true,
+        "attributePosition": "auto",
+        "bracketSpacing": false,
+        "formatWithErrors": false,
+        "indentStyle": "space",
+        "indentWidth": 4,
+        "lineEnding": "lf",
+        "lineWidth": 100,
+        "useEditorconfig": true
+    },
+    "linter": {
+        "enabled": true,
+        "rules": {
+            "recommended": true
+        }
+    },
+    "javascript": {
+        "formatter": {
+            "arrowParentheses": "always",
+            "bracketSameLine": false,
+            "jsxQuoteStyle": "double",
+            "quoteProperties": "asNeeded",
+            "quoteStyle": "double",
+            "semicolons": "asNeeded",
+            "trailingCommas": "es5"
+        }
+    },
+    "assist": {
+        "enabled": true,
+        "actions": {
+            "source": {
+                "organizeImports": {
+                    "level": "on",
+                    "options": {
+                        "groups": [
+                            {"type": true, "source": [":BUN:", ":NODE:"]},
+                            {"type": false, "source": [":BUN:", ":NODE:"]},
+                            ":BLANK_LINE:",
+                            {"type": true, "source": [":PACKAGE:"]},
+                            {"type": false, "source": [":PACKAGE:"]},
+                            ":BLANK_LINE:",
+                            {"type": true, "source": ":PATH:"},
+                            {"type": false, "source": ":PATH:"},
+                            ":BLANK_LINE:",
+                            ":URL"
+                        ]
+                    }
+                }
+            }
+        }
+    }
+}

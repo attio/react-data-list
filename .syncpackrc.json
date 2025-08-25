@@ -1,0 +1,52 @@
+{
+    "$schema": "node_modules/syncpack/schema.json",
+    "indent": "  ",
+    "sortAz": [
+        "bin",
+        "contributors",
+        "scripts",
+        "keywords",
+        "dependencies",
+        "peerDependencies",
+        "resolutions"
+    ],
+    "sortFirst": [
+        "private",
+        "name",
+        "description",
+        "version",
+        "author",
+        "license",
+        "keywords",
+        "bugs",
+        "homepage",
+        "repository",
+        "type",
+        "main",
+        "source",
+        "react-native",
+        "types",
+        "files",
+        "module",
+        "exports",
+        "imports",
+        "engines",
+        "packageManager",
+        "scripts",
+        "dependencies",
+        "devDependencies",
+        "peerDependencies",
+        "trustedDependencies",
+        "resolutions",
+        "workspaces"
+    ],
+    "sortPackages": true,
+    "source": ["package.json"],
+    "versionGroups": [
+        {
+            "dependencies": ["$LOCAL"],
+            "dependencyTypes": ["dev"],
+            "pinVersion": "workspace:^"
+        }
+    ]
+}

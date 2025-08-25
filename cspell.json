@@ -1,0 +1,17 @@
+{
+    "$schema": "https://raw.githubusercontent.com/streetsidesoftware/cspell/main/cspell.schema.json",
+    "version": "0.2",
+    "ignorePaths": [
+        "package.json",
+        "**/lib/*",
+        "**/node_modules/*",
+        "*.tsbuildinfo",
+        "bun.lock",
+        "out-tsc",
+        "./cspell.json"
+    ],
+    "ignoreRegExpList": ["/from\\s+(['\"]).*\\1/"],
+    "dictionaryDefinitions": [],
+    "words": ["bunx", "pacocoursey"],
+    "ignoreWords": []
+}

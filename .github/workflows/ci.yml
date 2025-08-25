@@ -1,0 +1,40 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    types: [opened, synchronize]
+
+env:
+  DO_NOT_TRACK: 1
+
+jobs:
+  build:
+    name: Build and Test
+    timeout-minutes: 15
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Setup CI
+        uses: ./.github/actions/ci-setup
+
+      - name: Check TypeScript
+        run: bun run check-typescript
+
+      - name: Check Biome
+        run: bun run check-biome
+
+      - name: Check Syncpack
+        run: bun run check-syncpack
+
+      - name: Check CSpell
+        run: bun run check-cspell
+

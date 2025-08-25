@@ -1,0 +1,11 @@
+{
+    "$schema": "https://json.schemastore.org/tsconfig",
+    "display": "Aux",
+    "extends": "./config/tsconfig.base.json",
+    "compilerOptions": {
+        "rootDir": "./",
+        "outDir": "./out-tsc/aux",
+        "types": ["node"]
+    },
+    "files": ["tsup.config.ts"]
+}

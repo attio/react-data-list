@@ -1,0 +1,28 @@
+name: Setup CI
+description: Sets up the CI environment with things we always need
+
+runs:
+  using: composite
+  steps:
+    - name: Setup Bun package manager
+      uses: oven-sh/setup-bun@v1
+      with:
+        bun-version: 1.2.21
+
+    - name: Install dependencies
+      run: |
+        if ! bun install --frozen-lockfile 2>&1 | tee output.txt; then
+          if grep -q "error: lockfile had changes, but lockfile is frozen" output.txt; then
+            echo "::group::Lockfile diff"
+            git diff bun.lock
+            echo "::endgroup::"
+          fi
+          rm output.txt
+          exit 1
+        fi
+        rm output.txt
+      shell: bash
+
+    - name: Check for bun.lock changes
+      run: git diff --exit-code -- bun.lock
+      shell: bash

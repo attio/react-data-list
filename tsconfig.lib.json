@@ -1,0 +1,18 @@
+{
+    "$schema": "https://json.schemastore.org/tsconfig",
+    "extends": "./config/tsconfig.base.json",
+    "display": "Lib",
+    "compilerOptions": {
+        "rootDir": "./src",
+        "outDir": "./out-tsc/lib",
+        "target": "es2020",
+        "module": "ESNext",
+        "moduleResolution": "bundler",
+        "verbatimModuleSyntax": true,
+        "moduleDetection": "force",
+        "esModuleInterop": true,
+        "jsx": "react-jsx"
+    },
+    "include": ["src"],
+    "exclude": ["node_modules"]
+}
