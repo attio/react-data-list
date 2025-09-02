@@ -10,8 +10,8 @@
         "out-tsc",
         "./cspell.json"
     ],
-    "ignoreRegExpList": ["/from\\s+(['\"]).*\\1/"],
+    "ignoreRegExpList": ["/from\\s+(['\"]).*\\1/", "/(['\"`]).*?\\1/g"],
     "dictionaryDefinitions": [],
-    "words": ["bunx", "weakref", "attio"],
+    "words": ["bunx", "weakref", "Lotr"],
     "ignoreWords": []
 }

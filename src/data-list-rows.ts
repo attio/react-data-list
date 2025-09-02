@@ -6,14 +6,14 @@ import {
     useDataListDescriptorDescendant,
 } from "./data-list-descriptor-context"
 
-interface DataListRowsProps {
-    descriptors: Array<DataListDescriptor<unknown>>
+interface DataListRowsProps<TRenderItem> {
+    descriptors: Array<DataListDescriptor<TRenderItem>>
 }
 
 /**
  * Connects a single item row to the list.
  */
-export function DataListRows({descriptors}: DataListRowsProps) {
+export function DataListRows<TRenderItem>({descriptors}: DataListRowsProps<TRenderItem>) {
     const {attachDescriptors} = useDataListDescriptorContext()
 
     const index = useDataListDescriptorDescendant({})

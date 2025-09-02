@@ -1,0 +1,25 @@
+import type {ViewStyle} from "react-native"
+
+export type LayoutViewStyleKeys =
+    | "flex"
+    | "flexBasis"
+    | "flexGrow"
+    | "flexShrink"
+    | "margin"
+    | "marginBottom"
+    | "marginEnd"
+    | "marginHorizontal"
+    | "marginLeft"
+    | "marginRight"
+    | "marginStart"
+    | "marginTop"
+    | "marginVertical"
+    | "position"
+    | "bottom"
+    | "left"
+    | "top"
+    | "right"
+    | "alignSelf"
+    | "transform"
+
+export type LayoutViewStyle = Pick<ViewStyle, LayoutViewStyleKeys>

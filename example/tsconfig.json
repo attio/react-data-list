@@ -1,6 +1,7 @@
 {
     "extends": "../config/tsconfig.base.json",
     "compilerOptions": {
+        "baseUrl": ".",
         "moduleSuffixes": [".ios", ".android", ""],
         "lib": [
             "es2019",
@@ -19,7 +20,18 @@
         ],
         "jsx": "react-native",
         "types": ["react-native"],
-        "skipLibCheck": true
+        "skipLibCheck": true,
+        "paths": {
+            "@attio/react-data-list": ["../src"]
+        }
     },
-    "include": ["**/*.ts", "**/*.tsx", ".expo/types/**/*.ts", "expo-env.d.ts"]
+    "include": [
+        "app/**/*.ts",
+        "app/**/*.tsx",
+        ".expo/types/**/*.ts",
+        "expo-env.d.ts",
+        "src/**/*.ts",
+        "src/**/*.tsx",
+        "../src"
+    ]
 }

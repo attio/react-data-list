@@ -1,6 +1,7 @@
 import React, {useDeferredValue} from "react"
 
 import type {
+    DataListDescriptor,
     DataListDescriptors,
     DataListRenderer,
     DataListRendererProps as DataListRendererPropsType,
@@ -28,7 +29,7 @@ export function DataListMasterRenderer<TRenderItem>({
         const sortedDescriptors = [...descriptors.entries()].sort((a, b) => a[0] - b[0])
 
         return sortedDescriptors.flatMap(([index, descriptors]) =>
-            descriptors.map((d) => ({
+            descriptors.map((d: DataListDescriptor<TRenderItem>) => ({
                 descriptor: {
                     ...d,
                     id: [index, ...(Array.isArray(d.id) ? d.id : [d.id])],

@@ -32,6 +32,12 @@ export function DataListDescriptors<TRenderItem>({
                     return newDescriptors
                 })
 
+                // console.log(
+                //     "attachDescriptors",
+                //     index,
+                //     additionalDescriptors.map((v) => v.item)
+                // )
+
                 return () => {
                     setDescriptors((prevDescriptors) => {
                         const newDescriptors = new Map(prevDescriptors)

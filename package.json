@@ -28,15 +28,16 @@
     "build": "tsup --tsconfig tsconfig.lib.json",
     "changeset-publish": "bun run build-release && changeset publish",
     "changeset-version": "changeset version && bun run format-fix",
-    "check": "bun run check-typescript && bun run check-biome && bun run check-syncpack && bun run check-cspell",
+    "check": "bun run check-typescript && bun run check-biome && bun run check-syncpack && bun run check-cspell && cd example && bun run check-typescript",
     "check-biome": "biome check",
     "check-cspell": "cspell . --quiet",
-    "check-fix": "bun run check-typescript && bun run check-fix-biome && bun run check-fix-syncpack && bun run check-cspell",
+    "check-fix": "bun run check-typescript && bun run check-fix-biome && bun run check-fix-syncpack && bun run check-cspell && cd example && bun run check-typescript",
     "check-fix-biome": "biome check --write",
     "check-fix-syncpack": "syncpack format --log-levels error && syncpack lint",
     "check-syncpack": "syncpack format --log-levels error --check && syncpack lint",
     "check-typescript": "tsc --build --noEmit",
-    "clean": "rm -rf lib out-tsc"
+    "clean": "rm -rf lib out-tsc",
+    "dev": "cd example && bun run start"
   },
   "dependencies": {
     "@attio/fetchable": "0.0.1-experimental.5",
@@ -50,14 +51,22 @@
     "cspell": "^9.2.0",
     "syncpack": "14.0.0-alpha.19",
     "tsup": "^8.5.0",
+    "react": "19.0.0",
+    "@types/react": "~19.0.10",
     "typescript": "~5.9.2"
   },
   "peerDependencies": {
-    "@attio/react-descendants": "link:@attio/react-descendants",
+    "@attio/react-descendants": "^0.0.2",
     "@types/react": "*",
     "react": "*"
   },
   "trustedDependencies": [
     "@biomejs/biome"
-  ]
+  ],
+  "workspaces": {
+    "packages": [
+      "./",
+      "example"
+    ]
+  }
 }

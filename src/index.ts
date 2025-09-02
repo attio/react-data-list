@@ -1,9 +1,37 @@
-export type {
-    DataListDescriptor as Descriptor,
-    DataListRenderListItem as RenderListItem,
-    DataListRenderListItemInfo as RenderListItemInfo,
-    DataListRenderListItemInfoWithIndex as RenderListItemInfoWithIndex,
+import type {
+    DataListDescriptor,
+    DataListRenderListItem,
+    DataListRenderListItemInfo,
+    DataListRenderListItemInfoWithIndex,
 } from "./data-list-types"
-export {DataList} from "./data-list"
-export {DataListRow as Row} from "./data-list-row"
-export {DataListRows as Rows} from "./data-list-rows"
+import {DataList} from "./data-list"
+import {DataListRow} from "./data-list-row"
+import {DataListRows} from "./data-list-rows"
+import {DataListFetchable} from "./templates/fetchable/data-list-fetchable"
+
+export {getFurthestLeftOfRecyclerType} from "./helpers/get-furthest-left-of-recycler-type"
+export {getFurthestRightOfRecyclerType} from "./helpers/get-furthest-right-of-recycler-type"
+export {getRelativePositionPerRecyclerType} from "./helpers/get-relative-position-per-recycler-type"
+
+// biome-ignore lint/correctness/noUnusedVariables: namespace expansion
+const ReactDataList = DataList as typeof DataList & {
+    Row: typeof DataListRow
+    Rows: typeof DataListRows
+    Fetchable: typeof DataListFetchable
+}
+
+ReactDataList.Row = DataListRow
+ReactDataList.Rows = DataListRows
+ReactDataList.Fetchable = DataListFetchable
+
+namespace ReactDataList {
+    export type Descriptor<TRenderItem> = DataListDescriptor<TRenderItem>
+    export type RenderListItem<TRenderItem> = DataListRenderListItem<TRenderItem>
+    export type RenderListItemInfo<TRenderItem> = DataListRenderListItemInfo<TRenderItem>
+    export type RenderListItemInfoWithIndex<TRenderItem> =
+        DataListRenderListItemInfoWithIndex<TRenderItem>
+}
+
+export {ReactDataList}
+
+export default ReactDataList

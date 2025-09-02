@@ -11,15 +11,20 @@
     "android": "expo start --android",
     "check-typescript": "tsc --build --noEmit",
     "ios": "expo start --ios",
-    "reset-project": "node ./scripts/reset-project.js",
     "start": "expo start",
     "web": "expo start --web"
   },
   "dependencies": {
+    "@dev-plugins/react-navigation": "^0.3.1",
+    "@expo-google-fonts/inter": "^0.4.1",
     "@expo/vector-icons": "^14.1.0",
     "@react-navigation/bottom-tabs": "^7.3.10",
     "@react-navigation/elements": "^2.3.8",
     "@react-navigation/native": "^7.1.6",
+    "@react-navigation/native-stack": "^7.3.25",
+    "@shopify/flash-list": "2.0.2",
+    "@shopify/restyle": "^2.4.5",
+    "colord": "^2.9.3",
     "expo": "~53.0.22",
     "expo-blur": "~14.1.5",
     "expo-constants": "~17.1.7",
@@ -47,6 +52,7 @@
   "devDependencies": {
     "@babel/core": "^7.25.2",
     "@types/react": "~19.0.10",
+    "get-yarn-workspaces": "^1.0.2",
     "typescript": "~5.9.2"
   }
 }
