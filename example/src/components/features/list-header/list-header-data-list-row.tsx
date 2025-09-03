@@ -28,7 +28,7 @@ export function ListHeaderDataListRow({title}: Omit<ListHeaderItem, "id">) {
     return (
         <ReactDataList.Row
             id={id}
-            item={React.useMemo(() => ({id, title}), [id, title])}
+            item={React.useMemo(() => ({id, title}), [title])}
             render={renderListHeader}
             recyclerType="list-header"
         />

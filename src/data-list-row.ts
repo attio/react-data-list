@@ -10,14 +10,21 @@ import {
  * Connects a single item row to the list.
  */
 export function DataListRow<TRenderItem>(descriptor: DataListDescriptor<TRenderItem>) {
-    const {attachDescriptors} = useDataListDescriptorContext()
+    const {attachDescriptors, markForIndex} = useDataListDescriptorContext()
+
+    const id = React.useId()
+    React.useLayoutEffect(() => {
+        const detach = attachDescriptors(id, [descriptor])
+
+        return detach
+    }, [attachDescriptors, descriptor])
 
     const index = useDataListDescriptorDescendant({})
     React.useLayoutEffect(() => {
-        const detach = attachDescriptors(index, [descriptor])
+        const detach = markForIndex(id, index)
 
         return detach
-    }, [attachDescriptors, descriptor, index])
+    }, [markForIndex, index])
 
     return null
 }

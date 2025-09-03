@@ -5,7 +5,8 @@ import {createDescendantContext} from "@attio/react-descendants"
 import type {DataListDescriptor, DataListDescriptorDescendant} from "./data-list-types"
 
 export interface DataListDescriptorContextProviderContext {
-    attachDescriptors: (index: number, descriptors: Array<DataListDescriptor>) => () => void
+    attachDescriptors: (id: string, descriptors: Array<DataListDescriptor>) => () => void
+    markForIndex: (id: string, index: number) => void
 }
 
 const DataListDescriptorContext = React.createContext<

@@ -1,8 +1,10 @@
 import * as React from "react"
 
 import type {
+    DataListAllDescriptors,
     DataListDescriptor,
-    DataListDescriptors as DataListDescriptorsType,
+    DataListDescriptorIndexes,
+    DescriptorId,
 } from "./data-list-types"
 import {
     DataListDescriptorContextProvider,
@@ -13,46 +15,70 @@ import {
 export interface DataListDescriptorsProps<TRenderItem>
     extends Omit<
         DataListDescriptorContextProviderContext,
-        "children" | "attachDescriptors" | "updateDescriptorIndex"
+        "children" | "attachDescriptors" | "markForIndex"
     > {
-    descriptors: React.ReactNode
-    setDescriptors: React.Dispatch<React.SetStateAction<DataListDescriptorsType<TRenderItem>>>
+    rowChildren: React.ReactNode
+    setAllDescriptors: React.Dispatch<React.SetStateAction<DataListAllDescriptors<TRenderItem>>>
+    setDescriptorIndexes: React.Dispatch<React.SetStateAction<DataListDescriptorIndexes>>
 }
 
 export function DataListDescriptors<TRenderItem>({
-    descriptors,
-    setDescriptors,
+    rowChildren,
+    setAllDescriptors,
+    setDescriptorIndexes: outerSetDescriptorIndexes,
 }: DataListDescriptorsProps<TRenderItem>) {
     const attachDescriptors: DataListDescriptorContextProviderContext["attachDescriptors"] =
         React.useCallback(
-            (index: number, additionalDescriptors: Array<DataListDescriptor<TRenderItem>>) => {
-                setDescriptors((prevDescriptors) => {
-                    const newDescriptors = new Map(prevDescriptors)
-                    newDescriptors.set(index, additionalDescriptors)
+            (id: DescriptorId, rowDescriptors: Array<DataListDescriptor<TRenderItem>>) => {
+                setAllDescriptors((prevAllDescriptors) => {
+                    const newDescriptors = new Map(prevAllDescriptors)
+                    newDescriptors.set(id, rowDescriptors)
                     return newDescriptors
                 })
 
-                // console.log(
-                //     "attachDescriptors",
-                //     index,
-                //     additionalDescriptors.map((v) => v.item)
-                // )
-
                 return () => {
-                    setDescriptors((prevDescriptors) => {
-                        const newDescriptors = new Map(prevDescriptors)
-                        newDescriptors.delete(index)
+                    setAllDescriptors((prevAllDescriptors) => {
+                        const newDescriptors = new Map(prevAllDescriptors)
+                        newDescriptors.delete(id)
                         return newDescriptors
                     })
                 }
             },
-            [setDescriptors]
+            [setAllDescriptors]
+        )
+
+    const markForIndex: DataListDescriptorContextProviderContext["markForIndex"] =
+        React.useCallback(
+            (id: DescriptorId, index: number) => {
+                outerSetDescriptorIndexes((prevDescriptorIndexes) => {
+                    const newDescriptorsIndex = new Map(prevDescriptorIndexes)
+                    newDescriptorsIndex.set(index, id)
+                    return newDescriptorsIndex
+                })
+
+                return () => {
+                    outerSetDescriptorIndexes((prevDescriptorIndexes) => {
+                        const currentIdAtIndex = prevDescriptorIndexes.get(index)
+
+                        // Already used
+                        if (currentIdAtIndex !== id) return prevDescriptorIndexes
+
+                        const newDescriptorsIndex = new Map(prevDescriptorIndexes)
+                        newDescriptorsIndex.delete(index)
+                        return newDescriptorsIndex
+                    })
+                }
+            },
+            [outerSetDescriptorIndexes]
         )
 
     return (
-        <DataListDescriptorContextProvider attachDescriptors={attachDescriptors}>
+        <DataListDescriptorContextProvider
+            attachDescriptors={attachDescriptors}
+            markForIndex={markForIndex}
+        >
             <DataListDescriptorDescendantContextProvider>
-                {descriptors}
+                {rowChildren}
             </DataListDescriptorDescendantContextProvider>
         </DataListDescriptorContextProvider>
     )

@@ -1,10 +1,11 @@
 import React, {useDeferredValue} from "react"
 
 import type {
+    DataListAllDescriptors,
     DataListDescriptor,
-    DataListDescriptors,
+    DataListDescriptorIndexes,
     DataListRenderer,
-    DataListRendererProps as DataListRendererPropsType,
+    DataListRendererProps,
     DataListRendererRootRenderItem,
     DataListRendererRootRenderItemArgs,
     DataListRenderListItemInfo,
@@ -13,31 +14,37 @@ import {DataListRendererContextProvider} from "./data-list-renderer-context"
 import {cancelFrame, requestFrame} from "./utils/request-frame"
 
 export interface DataListMasterRendererProps<TRenderItem>
-    extends Omit<DataListRendererPropsType<TRenderItem>, "data" | "rootRenderItem" | "getItemId"> {
+    extends Omit<DataListRendererProps<TRenderItem>, "data" | "rootRenderItem" | "getItemId"> {
     renderer: DataListRenderer<TRenderItem> | ReturnType<DataListRenderer<TRenderItem>>
-    descriptors: DataListDescriptors<TRenderItem>
+    allDescriptors: DataListAllDescriptors<TRenderItem>
+    descriptorIndexes: DataListDescriptorIndexes
 }
 
 export function DataListMasterRenderer<TRenderItem>({
     renderer,
-    descriptors,
+    allDescriptors,
+    descriptorIndexes,
     ...rest
 }: DataListMasterRendererProps<TRenderItem>) {
     const newData = React.useMemo((): Array<
         DataListRendererRootRenderItemArgs<TRenderItem>["item"]
     > => {
-        const sortedDescriptors = [...descriptors.entries()].sort((a, b) => a[0] - b[0])
+        const sortedDescriptorIds = [...descriptorIndexes.entries()].sort((a, b) => a[0] - b[0])
 
-        return sortedDescriptors.flatMap(([index, descriptors]) =>
-            descriptors.map((d: DataListDescriptor<TRenderItem>) => ({
+        return sortedDescriptorIds.flatMap(([index, descriptorId]) => {
+            const descriptorsForId = allDescriptors.get(descriptorId)
+
+            if (!descriptorsForId) return []
+
+            return descriptorsForId.map((d: DataListDescriptor<TRenderItem>) => ({
                 descriptor: {
                     ...d,
                     id: [index, ...(Array.isArray(d.id) ? d.id : [d.id])],
                 },
                 descriptorSourceIndex: index,
             }))
-        )
-    }, [descriptors])
+        })
+    }, [allDescriptors, descriptorIndexes])
 
     const deferredData = useDeferredValue(newData)
 

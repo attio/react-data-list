@@ -74,13 +74,20 @@ export type DataListRenderListItem<TRenderItem> = (
     props: DataListRenderListItemInfoWithIndex<TRenderItem>
 ) => React.ReactElement | null
 
+type DescriptorId = string
+
 /**
  * The internal array of descriptors.
  */
-export type DataListDescriptors<TRenderItem = any> = Map<
-    number,
+export type DataListAllDescriptors<TRenderItem = any> = Map<
+    DescriptorId,
     Array<DataListDescriptor<TRenderItem>>
 >
+
+/**
+ * Tracks the position of descriptors at particular indexes.
+ */
+export type DataListDescriptorIndexes = Map<number, DescriptorId>
 
 /**
  * The internal data array.

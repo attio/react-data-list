@@ -1,12 +1,15 @@
 import React from "react"
 
-import type {DataListDescriptors as DataListDescriptorsType} from "./data-list-types"
+import type {DataListAllDescriptors, DataListDescriptorIndexes} from "./data-list-types"
 import {DataListDescriptors, type DataListDescriptorsProps} from "./data-list-descriptors"
 import {DataListMasterRenderer, type DataListMasterRendererProps} from "./data-list-master-renderer"
 
 export interface DataListProps<TRenderItem>
-    extends Omit<DataListMasterRendererProps<TRenderItem>, "descriptors" | "updateDescriptorIndex">,
-        Omit<DataListDescriptorsProps<TRenderItem>, "descriptors" | "setDescriptors"> {
+    extends Omit<DataListMasterRendererProps<TRenderItem>, "allDescriptors" | "descriptorIndexes">,
+        Omit<
+            DataListDescriptorsProps<TRenderItem>,
+            "rowChildren" | "setAllDescriptors" | "setDescriptorIndexes"
+        > {
     children: React.ReactNode
 }
 
@@ -17,14 +20,26 @@ export interface DataListProps<TRenderItem>
  * Supports familiar React concepts such as Suspense and Error boundaries.
  */
 export function DataList<TRenderItem>({renderer, children, ...rest}: DataListProps<TRenderItem>) {
-    const [descriptors, setDescriptors] = React.useState<DataListDescriptorsType<TRenderItem>>(
+    const [allDescriptors, setAllDescriptors] = React.useState<DataListAllDescriptors<TRenderItem>>(
+        new Map()
+    )
+    const [descriptorIndexes, setDescriptorIndexes] = React.useState<DataListDescriptorIndexes>(
         new Map()
     )
 
     return (
         <>
-            <DataListDescriptors setDescriptors={setDescriptors} descriptors={children} />
-            <DataListMasterRenderer {...rest} renderer={renderer} descriptors={descriptors} />
+            <DataListDescriptors
+                setAllDescriptors={setAllDescriptors}
+                setDescriptorIndexes={setDescriptorIndexes}
+                rowChildren={children}
+            />
+            <DataListMasterRenderer
+                {...rest}
+                renderer={renderer}
+                allDescriptors={allDescriptors}
+                descriptorIndexes={descriptorIndexes}
+            />
         </>
     )
 }

@@ -26,7 +26,7 @@ export function ColorDataListRow({colors}: Omit<ColorDataListRowItem, "id">) {
     return (
         <ReactDataList.Row
             id={id}
-            item={React.useMemo(() => ({id, colors}), [id, colors])}
+            item={React.useMemo(() => ({id, colors}), [colors])}
             render={renderColorDataList}
             recyclerType="color-data-list"
         />

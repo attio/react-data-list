@@ -14,14 +14,21 @@ interface DataListRowsProps<TRenderItem> {
  * Connects a single item row to the list.
  */
 export function DataListRows<TRenderItem>({descriptors}: DataListRowsProps<TRenderItem>) {
-    const {attachDescriptors} = useDataListDescriptorContext()
+    const {attachDescriptors, markForIndex} = useDataListDescriptorContext()
+
+    const id = React.useId()
+    React.useLayoutEffect(() => {
+        const detach = attachDescriptors(id, descriptors)
+
+        return detach
+    }, [attachDescriptors, descriptors])
 
     const index = useDataListDescriptorDescendant({})
     React.useLayoutEffect(() => {
-        const detach = attachDescriptors(index, descriptors)
+        const detach = markForIndex(id, index)
 
         return detach
-    }, [attachDescriptors, descriptors, index])
+    }, [markForIndex, index])
 
     return null
 }

@@ -34,7 +34,7 @@ export function ListItemDataListRow({name, color}: Omit<ListItemItem, "id">) {
     return (
         <ReactDataList.Row
             id={id}
-            item={React.useMemo(() => ({id, name, color}), [id, name, color])}
+            item={React.useMemo(() => ({id, name, color}), [name, color])}
             render={renderListItem}
             recyclerType="list-item"
         />
