@@ -1,21 +1,107 @@
 # React Data List
 
-A library for composing data arrays using React components.
+React Data List is a library which helps you build data arrays by expressing items declaratively using React components. It was built primarily for React Native, but should work anywhere.
 
 ## Why?
 
-Universal List is an API for composing together lists.
+For a full explanation around why this exists, please checkout the counterpart [article here](https://attio.com).
 
-In React Native world, virtualized lists are modelled with a flat array of data, along with a render function that describes how to render items. Most of our screens tend to be represented virtualized lists. It's a pillar to how we build.
+## 
 
-However, building this data array can be really difficult. The straightforward approach is to simply have a dataFetchable that's the result of a single useNexusSelector call. However quickly becomes a problem when you want to have granular control over loading states (e.g. if we fail to load a single notification then don't poison the entire fetchable) or especially when you want to compose familiar data & render logic across screens (e.g. task picker items on the record detail page). When you need to solve both of those problems you quickly end up in a real mess with data selectors that are hundreds of lines long and not approachable.
+## How does it look?
 
-Universal List allows you to model the creation of this data array in React JSX, encouraging the use of Suspense and Error Boundaries to achieve the behaviors you want. Nexus has first-class support for these wider React concepts, so the ergonomics are quite nice.
+### Example 1 - Basic
 
-## How does it work?
+```tsx
+function ErrorOnRenderCheck() {
+    return (
+        <View
+            onLayout={() => {
+                throw new Error("This never happens as we evaluate descriptors before first paint.")
+            }}
+        />
+    )
+}
 
-There are two main concepts: **row** and **renderer**.
-A **row** syncs some data and a render function to the list. The universal list then processes this into an aggregated data array, render function and other typical list functions. These then get passed into a renderer which takes the Universal List format and translates it into inputs for some list component, like FlashList. We refer to the item data that a row syncs as its **descriptor**
+<ReactDataList
+    renderer={
+        <FlashListRenderer
+            contentContainerStyle={contentContainerStyle}
+            ListHeaderComponent={
+                <Header
+                    toggleThorinAndCompany={toggleThorinAndCompany}
+                    jumbleFellowship={jumbleFellowship}
+                />
+            }
+        />
+    }
+    renderEmpty={() => (
+        /**
+         * This never happens as we're guaranteed rows will be
+         * evaluated to data items on first paint.
+         */
+        <View style={styles.alert}>
+            <ErrorOnRenderCheck />
+        </View>
+    )}
+>
+    {/* Supports nested ReactDataList instances */}
+    <ListHeaderDataListRow title="Places in Middle Earth" />
+    <MiddleEarthPlacesDataListRow placeItems={MIDDLE_EARTH_PLACES} />
+
+    <ListHeaderDataListRow title="The Fellowship" />
+    {fellowship.map((character) => (
+        <CharacterListItemDataListRow
+            key={character.name}
+            name={character.name}
+            race={character.race}
+            url={character.url}
+        />
+    ))}
+
+    {isShowingThorinAndCompany && (
+        <>
+            <ListHeaderDataListRow title="Thorin and Company" />
+            <React.Suspense fallback={<LoadingListItemDataListRow />}>
+                <MiddleEarthHobbitCompanyDataListRows />
+            </React.Suspense>
+        </>
+    )}
+</ReactDataList>
+```
+
+https://github.com/user-attachments/assets/23c2d232-7f35-470e-98b4-156efaaf326a
+
+### Example 2 - Fetchable Template
+
+A lightweight wrapper around `ReactDataList` which provides a top-level [React.Suspense](https://react.dev/reference/react/Suspense) and [ErrorBoundary](https://react.dev/reference/react/Component#static-getderivedstatefromerror). This is useful for typical async work, where you may want to display skeleton rows (via `renderPending`), a full-screen spinner (via `renderPending`), or perhaps a full-screen error message (via `renderError`).
+
+```tsx
+<ReactDataList.Fetchable
+    renderer={
+        <FlashListRenderer
+            contentContainerStyle={contentContainerStyle}
+            ListHeaderComponent={<Header reload={reload} />}
+        />
+    }
+    renderPendingRows={
+        <>
+            <ListHeaderDataListRow title="Thorin and Company" />
+            <LoadingListItemDataListRow />
+            <LoadingListItemDataListRow />
+            <LoadingListItemDataListRow />
+            <LoadingListItemDataListRow />
+            <LoadingListItemDataListRow />
+            <LoadingListItemDataListRow />
+        </>
+    }
+>
+    <ListHeaderDataListRow title="Thorin and Company" />
+    <MiddleEarthHobbitCompanyDataListRows key={reloadKey} />
+</ReactDataList.Fetchable>
+```
+
+https://github.com/user-attachments/assets/8ab7b63e-1ddc-40f9-8d20-6d443f21c934
 
 ## Release Process
 
