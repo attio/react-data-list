@@ -31,6 +31,15 @@ export default function TabLayout() {
                     ),
                 }}
             />
+            <Tabs.Screen
+                name="fetchable"
+                options={{
+                    title: "Fetchable",
+                    tabBarIcon: ({color, size}) => (
+                        <FontAwesome size={size} name="code" color={color} />
+                    ),
+                }}
+            />
         </Tabs>
     )
 }

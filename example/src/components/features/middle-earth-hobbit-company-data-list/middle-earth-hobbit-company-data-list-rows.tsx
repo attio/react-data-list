@@ -2,9 +2,9 @@ import {CharacterListItemDataListRow} from "../character-list-item/character-lis
 import {useMiddleEarthHobbitCompanyData} from "./use-middle-earth-hobbit-company-data"
 
 export default function MiddleEarthHobbitCompanyDataListRows() {
-    const places = useMiddleEarthHobbitCompanyData()
+    const characters = useMiddleEarthHobbitCompanyData()
 
-    return places.map((p) => (
-        <CharacterListItemDataListRow key={p.name} name={p.name} race={p.race} url={p.url} />
+    return characters.map((c) => (
+        <CharacterListItemDataListRow key={c.name} name={c.name} race={c.race} url={c.url} />
     ))
 }
