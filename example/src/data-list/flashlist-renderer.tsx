@@ -1,5 +1,4 @@
-/** biome-ignore-all lint/suspicious/noExplicitAny: ignore */
-import {FlashList, type FlashListProps, type FlashListRef} from "@shopify/flash-list"
+import {FlashList, type FlashListProps} from "@shopify/flash-list"
 import * as React from "react"
 
 import type ReactDataList from "@attio/react-data-list"
@@ -14,26 +13,22 @@ interface FlashListRendererProps<TRenderItem>
     animated?: boolean
 }
 
-export const FlashListRenderer = React.forwardRef<
-    FlashListRef<ReactDataList.RenderListItemInfo<any>>,
-    FlashListRendererProps<any>
->(function FlashListRenderer({...rest}, ref) {
+export function FlashListRenderer<TRenderItem>(props: FlashListRendererProps<TRenderItem>) {
     const {data, rootRenderItem, renderEmpty, getItemId} = useDataListRendererContext()
 
     const getItemType = React.useCallback(
-        (item: ReactDataList.RenderListItemInfo<any>) => item.descriptor.recyclerType,
+        (item: ReactDataList.RenderListItemInfo<TRenderItem>) => item.descriptor.recyclerType,
         []
     )
 
     return (
         <FlashList
-            ref={ref}
             data={data}
             renderItem={rootRenderItem}
             keyExtractor={(item) => getItemId(item)}
             getItemType={getItemType}
             ListEmptyComponent={renderEmpty}
-            {...rest}
+            {...props}
         />
     )
-})
+}
