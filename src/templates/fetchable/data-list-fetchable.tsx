@@ -16,7 +16,7 @@ interface DataListFetchableProps<TRenderItem>
 }
 
 /**
- * A wrapper around DataList to help handle some typical top-level.
+ * A wrapper around DataList to help handle typical top-level state behavior.
  */
 export function DataListFetchable<TRenderItem>({
     renderPending,
