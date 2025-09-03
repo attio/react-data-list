@@ -87,6 +87,10 @@ export default function HomeScreen() {
                 />
             }
             renderEmpty={() => (
+                /**
+                 * This never happens as we're guaranteed rows will be
+                 * evaluated to data items on first paint.
+                 */
                 <View style={styles.alert}>
                     <ErrorOnRenderCheck />
                 </View>
@@ -109,7 +113,15 @@ export default function HomeScreen() {
             {isShowingThorinAndCompany && (
                 <>
                     <ListHeaderDataListRow title="Thorin and Company" />
-                    <React.Suspense fallback={<LoadingListItemDataListRow />}>
+                    <React.Suspense
+                        fallback={
+                            <>
+                                <LoadingListItemDataListRow />
+                                <LoadingListItemDataListRow />
+                                <LoadingListItemDataListRow />
+                            </>
+                        }
+                    >
                         <MiddleEarthHobbitCompanyDataListRows />
                     </React.Suspense>
                 </>

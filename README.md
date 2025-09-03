@@ -74,7 +74,7 @@ https://github.com/user-attachments/assets/23c2d232-7f35-470e-98b4-156efaaf326a
 
 ### Example 2 - Fetchable Template
 
-A lightweight wrapper around `ReactDataList` which provides a top-level [React.Suspense](https://react.dev/reference/react/Suspense) and [ErrorBoundary](https://react.dev/reference/react/Component#static-getderivedstatefromerror). This is useful for typical async work, where you may want to display skeleton rows (via `renderPending`), a full-screen spinner (via `renderPending`), or perhaps a full-screen error message (via `renderError`).
+A lightweight wrapper around `ReactDataList` which provides a top-level [React.Suspense](https://react.dev/reference/react/Suspense) and [ErrorBoundary](https://react.dev/reference/react/Component#static-getderivedstatefromerror). This is useful for typical async work, where you may want to display skeleton rows (via `renderPendingRows`), a full-screen spinner (via `renderPending`), or perhaps a full-screen error message (via `renderError`).
 
 ```tsx
 <ReactDataList.Fetchable
