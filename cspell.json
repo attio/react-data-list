@@ -12,6 +12,6 @@
     ],
     "ignoreRegExpList": ["/from\\s+(['\"]).*\\1/", "/(['\"`]).*?\\1/g"],
     "dictionaryDefinitions": [],
-    "words": ["bunx", "weakref", "Lotr"],
+    "words": ["bunx", "weakref", "Thorin"],
     "ignoreWords": []
 }

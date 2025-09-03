@@ -19,17 +19,17 @@ function createInterFont(config: CreateInterFontConfig) {
 
 const lightTheme = createTheme({
     colors: {
-        accent: "#266DF0",
-        bgPrimary: "#FFFFFF",
-        bgSecondary: "#FBFBFB",
-        bgTertiary: "#F4F5F6",
-        strokePrimary: "#EEEFF1",
+        accent: "#B8860B",
+        bgPrimary: "#F5F5DC",
+        bgSecondary: "#F0E68C",
+        bgTertiary: "#DEB887",
+        strokePrimary: "#D2B48C",
         textOnAccent: "#FFFFFF",
-        textBlue: "#407FF2",
-        textPrimary: "#232529",
-        textSecondary: "#5C5E63",
-        textTertiary: "#75777C",
-        textQuaternary: "#9FA1A7",
+        textBlue: "#4682B4",
+        textPrimary: "#2F4F4F",
+        textSecondary: "#556B2F",
+        textTertiary: "#8B7355",
+        textQuaternary: "#A0522D",
     },
     spacing: {
         "2": 2,

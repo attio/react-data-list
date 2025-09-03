@@ -1,18 +1,25 @@
-import {type StyleProp, StyleSheet, View} from "react-native"
+import {Image} from "expo-image"
+import {type StyleProp, StyleSheet} from "react-native"
 
+import type {MiddleEarthCharacter} from "../../../data/middle-earth-the-fellowship"
 import type {LayoutViewStyle} from "../../../style/layout-view-style"
 import {Box} from "../../design-system/box"
 import {Text} from "../../design-system/text"
 
-export interface ListItemProps {
-    name: string
-    color: string
+export interface CharacterListItemProps extends MiddleEarthCharacter {
     isFirst: boolean
     isLast: boolean
     style?: StyleProp<LayoutViewStyle>
 }
 
-export function ListItem({name, color, isFirst, isLast, style}: ListItemProps) {
+export function CharacterListItem({
+    name,
+    race,
+    url,
+    isFirst,
+    isLast,
+    style,
+}: CharacterListItemProps) {
     return (
         <Box
             flexDirection="row"
@@ -21,25 +28,30 @@ export function ListItem({name, color, isFirst, isLast, style}: ListItemProps) {
             borderColor="strokePrimary"
             backgroundColor="bgSecondary"
             borderWidth={1}
-            padding="4"
+            borderBottomWidth={isLast ? 1 : 0}
+            padding="6"
+            paddingHorizontal="8"
             alignSelf="stretch"
             {...(isFirst && {borderTopLeftRadius: "8", borderTopRightRadius: "8"})}
             {...(isLast && {borderBottomLeftRadius: "8", borderBottomRightRadius: "8"})}
             style={style}
-            height={32}
         >
-            <View style={[styles.avatar, {backgroundColor: color}]} />
+            <Image source={{uri: url}} style={styles.avatar} />
 
             <Text variant="body">{name}</Text>
+
+            <Text variant="body" color="textQuaternary">
+                {race}
+            </Text>
         </Box>
     )
 }
 
 const styles = StyleSheet.create({
     avatar: {
-        width: 16,
-        height: 16,
-        borderRadius: 8,
+        width: 32,
+        height: 32,
+        borderRadius: "50%",
         flexDirection: "row",
         alignItems: "center",
     },

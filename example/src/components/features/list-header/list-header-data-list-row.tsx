@@ -1,9 +1,9 @@
 import * as React from "react"
 import {StyleSheet} from "react-native"
-import {LIST_HORIZONTAL_MARGIN} from "src/components/design-system/constants"
 
 import ReactDataList from "@attio/react-data-list"
 
+import {LIST_HORIZONTAL_MARGIN} from "../../design-system/constants"
 import {ListHeader, type ListHeaderProps} from "./list-header"
 
 interface ListHeaderItem extends Omit<ListHeaderProps, "style"> {

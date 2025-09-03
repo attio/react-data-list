@@ -1,86 +1,26 @@
 import * as React from "react"
 import {StyleSheet, View} from "react-native"
 import {useSafeAreaInsets} from "react-native-safe-area-context"
-import {ListItemDataListRow} from "src/components/features/list-item/list-item-data-list-row"
 
 import {ReactDataList} from "@attio/react-data-list"
 
+import {Box} from "../../src/components/design-system/box"
 import {Button} from "../../src/components/design-system/button"
 import {LIST_HORIZONTAL_MARGIN} from "../../src/components/design-system/constants"
-import {ColorDataListRow} from "../../src/components/features/color-data-list/color-data-list-row"
+import {CharacterListItemDataListRow} from "../../src/components/features/character-list-item/character-list-item-data-list-row"
 import {ListHeaderDataListRow} from "../../src/components/features/list-header/list-header-data-list-row"
-import LotrPlacesDataList from "../../src/components/features/lotr-places-data-list/lotr-places-data-list"
+import {LoadingListItemDataListRow} from "../../src/components/features/loading-list-item/loading-list-item-data-list-row"
+import MiddleEarthHobbitCompanyDataListRows from "../../src/components/features/middle-earth-hobbit-company-data-list/middle-earth-hobbit-company-data-list-rows"
+import {MiddleEarthPlacesDataListRow} from "../../src/components/features/middle-earth-places-data-list/middle-earth-places-data-list-row"
+import {MIDDLE_EARTH_PLACES} from "../../src/data/middle-earth-places"
+import {
+    MIDDLE_EARTH_THE_FELLOWSHIP,
+    type MiddleEarthCharacter,
+} from "../../src/data/middle-earth-the-fellowship"
 import {FlashListRenderer} from "../../src/data-list/flashlist-renderer"
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-    },
-    contentContainer: {
-        marginBottom: 64,
-    },
-    alert: {
-        width: "100%",
-        aspectRatio: 1,
-        backgroundColor: "red",
-    },
-    header: {
-        flexDirection: "row",
-        alignItems: "center",
-        justifyContent: "space-between",
-        gap: 8,
-        marginHorizontal: LIST_HORIZONTAL_MARGIN,
-        marginBottom: 16,
-    },
-})
-
-const PEOPLE_NAMES = [
-    {name: "Thorin", color: "black"},
-    {name: "Fíli", color: "blue"},
-    {name: "Kíli", color: "green"},
-    {name: "Oín", color: "red"},
-    {name: "Glóin", color: "orange"},
-    {name: "Balin", color: "purple"},
-    {name: "Dwalin", color: "brown"},
-    {name: "Ori", color: "pink"},
-    {name: "Dori", color: "yellow"},
-    {name: "Nori", color: "cyan"},
-    {name: "Bifur", color: "magenta"},
-    {name: "Bofur", color: "lime"},
-    {name: "Bombur", color: "navy"},
-    {name: "Bilbo", color: "gold"},
-    {name: "Gandalf", color: "silver"},
-]
-
-const WEAPONS = [
-    "Sting",
-    "Glamdring",
-    "Orcrist",
-    "Andúril",
-    "Narsil",
-    "Herugrim",
-    "Hadhafang",
-    "Aeglos",
-    "Gurthang",
-    "Ringil",
-]
-
-const ALL_COLORS = [
-    "aquamarine",
-    "coral",
-    "crimson",
-    "darkgoldenrod",
-    "darkolivegreen",
-    "deeppink",
-    "deepskyblue",
-    "dimgray",
-    "dodgerblue",
-    "firebrick",
-    "forestgreen",
-    "fuchsia",
-]
-
-const getJumbledPeople = () => PEOPLE_NAMES.slice().sort(() => Math.random() - 0.5)
+const getJumbledFellowship = () =>
+    MIDDLE_EARTH_THE_FELLOWSHIP.slice().sort(() => Math.random() - 0.5)
 
 function ErrorOnRenderCheck() {
     return (
@@ -93,16 +33,17 @@ function ErrorOnRenderCheck() {
 }
 
 export default function HomeScreen() {
-    const [people, setPeople] = React.useState<typeof PEOPLE_NAMES>(getJumbledPeople)
-    const [isShowingPlaces, setIsShowingPlaces] = React.useState(false)
+    const [fellowship, setFellowship] =
+        React.useState<ReadonlyArray<MiddleEarthCharacter>>(getJumbledFellowship)
+    const [isShowingThorinAndCompany, setIsShowingThorinAndCompany] = React.useState(false)
 
-    const togglePlaces = () => {
-        setIsShowingPlaces((s) => !s)
+    const toggleThorinAndCompany = () => {
+        setIsShowingThorinAndCompany((s) => !s)
     }
 
-    const jumblePeople = () => {
-        console.log("Jumble people to test recreating list.")
-        setPeople(getJumbledPeople())
+    // Jumble fellowship to test recreating list.
+    const jumbleFellowship = () => {
+        setFellowship(getJumbledFellowship())
     }
 
     const insets = useSafeAreaInsets()
@@ -116,13 +57,24 @@ export default function HomeScreen() {
                         {paddingTop: insets.top, paddingBottom: insets.bottom},
                     ]}
                     ListHeaderComponent={
-                        <View style={styles.header}>
+                        <Box
+                            flexDirection="row"
+                            gap="4"
+                            marginHorizontal={`${LIST_HORIZONTAL_MARGIN}`}
+                            marginBottom="16"
+                            flexShrink={1}
+                        >
                             <Button
-                                onPress={togglePlaces}
-                                title={isShowingPlaces ? "Hide Places" : "Show Places"}
+                                onPress={toggleThorinAndCompany}
+                                title={
+                                    isShowingThorinAndCompany
+                                        ? "Hide Thorin and Company"
+                                        : "Show Thorin and Company"
+                                }
+                                style={styles.button}
                             />
-                            <Button onPress={jumblePeople} title="Jumble People" />
-                        </View>
+                            <Button onPress={jumbleFellowship} title="Jumble Fellowship" />
+                        </Box>
                     }
                 />
             }
@@ -133,33 +85,44 @@ export default function HomeScreen() {
             )}
         >
             {/* Supports nested ReactDataList instances */}
-            <ListHeaderDataListRow title="Colors" />
-            <ColorDataListRow colors={ALL_COLORS} />
+            <ListHeaderDataListRow title="Places in Middle Earth" />
+            <MiddleEarthPlacesDataListRow placeItems={MIDDLE_EARTH_PLACES} />
 
-            {isShowingPlaces && (
+            <ListHeaderDataListRow title="The Fellowship" />
+            {fellowship.map((character) => (
+                <CharacterListItemDataListRow
+                    key={character.name}
+                    name={character.name}
+                    race={character.race}
+                    url={character.url}
+                />
+            ))}
+
+            {isShowingThorinAndCompany && (
                 <>
-                    <ListHeaderDataListRow title="Places" />
-                    <React.Suspense
-                        fallback={<ListItemDataListRow name="Loading places..." color="black" />}
-                    >
-                        <LotrPlacesDataList />
+                    <ListHeaderDataListRow title="Thorin and Company" />
+                    <React.Suspense fallback={<LoadingListItemDataListRow />}>
+                        <MiddleEarthHobbitCompanyDataListRows />
                     </React.Suspense>
                 </>
             )}
-
-            <ListHeaderDataListRow title="People" />
-            {people.map((person) => (
-                <ListItemDataListRow key={person.name} name={person.name} color={person.color} />
-            ))}
-
-            <ListHeaderDataListRow title="Weapons" />
-            {WEAPONS.map((weapon, idx) => (
-                <ListItemDataListRow
-                    key={weapon}
-                    name={weapon}
-                    color={ALL_COLORS.at(idx % ALL_COLORS.length) ?? "black"}
-                />
-            ))}
         </ReactDataList>
     )
 }
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+    },
+    button: {
+        flex: 1,
+    },
+    contentContainer: {
+        marginBottom: 64,
+    },
+    alert: {
+        width: "100%",
+        aspectRatio: 1,
+        backgroundColor: "red",
+    },
+})

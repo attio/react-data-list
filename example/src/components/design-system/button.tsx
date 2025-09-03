@@ -11,7 +11,7 @@ interface ExampleButtonProps extends Pick<TouchableOpacityProps, "onPress"> {
 
 export function Button({title, onPress, style}: ExampleButtonProps) {
     return (
-        <TouchableOpacity onPress={onPress} activeOpacity={0.8}>
+        <TouchableOpacity onPress={onPress} activeOpacity={0.8} style={style}>
             <Box
                 minHeight={52}
                 backgroundColor="accent"
@@ -19,9 +19,9 @@ export function Button({title, onPress, style}: ExampleButtonProps) {
                 padding="8"
                 justifyContent="center"
                 alignItems="center"
-                style={style}
+                flex={1}
             >
-                <Text variant="titleLarge" color="textOnAccent" numberOfLines={1}>
+                <Text variant="medium" color="textOnAccent">
                     {title}
                 </Text>
             </Box>

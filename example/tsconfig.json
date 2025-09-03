@@ -1,7 +1,6 @@
 {
     "extends": "../config/tsconfig.base.json",
     "compilerOptions": {
-        "baseUrl": ".",
         "moduleSuffixes": [".ios", ".android", ""],
         "lib": [
             "es2019",
