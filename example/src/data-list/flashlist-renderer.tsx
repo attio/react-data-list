@@ -8,10 +8,8 @@ import {useDataListRendererContext} from "../../../src/data-list-renderer-contex
 interface FlashListRendererProps<TRenderItem>
     extends Omit<
         FlashListProps<ReactDataList.RenderListItemInfo<TRenderItem>>,
-        "data" | "renderItem" | "getItemType" | "keyExtractor" | "ListEmptyComponent"
-    > {
-    animated?: boolean
-}
+        "data" | "renderItem" | "keyExtractor" | "getItemType" | "ListEmptyComponent"
+    > {}
 
 export function FlashListRenderer<TRenderItem>(props: FlashListRendererProps<TRenderItem>) {
     const {data, rootRenderItem, renderEmpty, getItemId} = useDataListRendererContext()

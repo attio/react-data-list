@@ -58,6 +58,10 @@ export default function FetchableScreen() {
                     ListHeaderComponent={<Header reload={reload} />}
                 />
             }
+            /**
+             * This catches the suspense signal from below and gives us a
+             * chance to attach a different set of rows.
+             */
             renderPendingRows={
                 <>
                     <ListHeaderDataListRow title="Thorin and Company" />
@@ -76,6 +80,7 @@ export default function FetchableScreen() {
             )}
         >
             <ListHeaderDataListRow title="Thorin and Company" />
+            {/* This component throws a suspense signal whilst loading */}
             <MiddleEarthHobbitCompanyDataListRows key={reloadKey} />
         </ReactDataList.Fetchable>
     )
