@@ -22,6 +22,20 @@ function ErrorOnRenderCheck() {
     )
 }
 
+function Header({reload}: {reload: () => void}) {
+    return (
+        <Box
+            flexDirection="column"
+            gap="4"
+            marginHorizontal={`${LIST_HORIZONTAL_MARGIN}`}
+            marginBottom="16"
+            flexShrink={1}
+        >
+            <Button onPress={reload} title="Reload" />
+        </Box>
+    )
+}
+
 export default function FetchableScreen() {
     const [reloadKey, setReloadKey] = React.useState(1)
 
@@ -31,26 +45,17 @@ export default function FetchableScreen() {
     }
 
     const insets = useSafeAreaInsets()
+    const contentContainerStyle = [
+        styles.contentContainer,
+        {paddingTop: insets.top, paddingBottom: insets.bottom},
+    ]
 
     return (
         <ReactDataList.Fetchable
             renderer={
                 <FlashListRenderer
-                    contentContainerStyle={[
-                        styles.contentContainer,
-                        {paddingTop: insets.top, paddingBottom: insets.bottom},
-                    ]}
-                    ListHeaderComponent={
-                        <Box
-                            flexDirection="column"
-                            gap="4"
-                            marginHorizontal={`${LIST_HORIZONTAL_MARGIN}`}
-                            marginBottom="16"
-                            flexShrink={1}
-                        >
-                            <Button onPress={reload} title="Reload" />
-                        </Box>
-                    }
+                    contentContainerStyle={contentContainerStyle}
+                    ListHeaderComponent={<Header reload={reload} />}
                 />
             }
             renderPendingRows={

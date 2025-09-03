@@ -32,6 +32,27 @@ function ErrorOnRenderCheck() {
     )
 }
 
+function Header({
+    toggleThorinAndCompany,
+    jumbleFellowship,
+}: {
+    toggleThorinAndCompany: () => void
+    jumbleFellowship: () => void
+}) {
+    return (
+        <Box
+            flexDirection="row"
+            gap="4"
+            marginHorizontal={`${LIST_HORIZONTAL_MARGIN}`}
+            marginBottom="16"
+            flexShrink={1}
+        >
+            <Button onPress={toggleThorinAndCompany} title="Toggle Thorin and Company" />
+            <Button onPress={jumbleFellowship} title="Jumble Fellowship" />
+        </Box>
+    )
+}
+
 export default function HomeScreen() {
     const [fellowship, setFellowship] =
         React.useState<ReadonlyArray<MiddleEarthCharacter>>(getJumbledFellowship)
@@ -47,34 +68,21 @@ export default function HomeScreen() {
     }
 
     const insets = useSafeAreaInsets()
+    const contentContainerStyle = [
+        styles.contentContainer,
+        {paddingTop: insets.top, paddingBottom: insets.bottom},
+    ]
 
     return (
         <ReactDataList
             renderer={
                 <FlashListRenderer
-                    contentContainerStyle={[
-                        styles.contentContainer,
-                        {paddingTop: insets.top, paddingBottom: insets.bottom},
-                    ]}
+                    contentContainerStyle={contentContainerStyle}
                     ListHeaderComponent={
-                        <Box
-                            flexDirection="row"
-                            gap="4"
-                            marginHorizontal={`${LIST_HORIZONTAL_MARGIN}`}
-                            marginBottom="16"
-                            flexShrink={1}
-                        >
-                            <Button
-                                onPress={toggleThorinAndCompany}
-                                title={
-                                    isShowingThorinAndCompany
-                                        ? "Hide Thorin and Company"
-                                        : "Show Thorin and Company"
-                                }
-                                style={styles.button}
-                            />
-                            <Button onPress={jumbleFellowship} title="Jumble Fellowship" />
-                        </Box>
+                        <Header
+                            toggleThorinAndCompany={toggleThorinAndCompany}
+                            jumbleFellowship={jumbleFellowship}
+                        />
                     }
                 />
             }
