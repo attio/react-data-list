@@ -6,14 +6,15 @@ import {
     useDataListDescriptorDescendant,
 } from "./data-list-descriptor-context"
 
-interface DataListRowsProps<TRenderItem> {
-    descriptors: Array<DataListDescriptor<TRenderItem>>
+interface DataListRowsProps {
+    // biome-ignore lint/suspicious/noExplicitAny: allow any to avoid union issues
+    descriptors: Array<DataListDescriptor<any>>
 }
 
 /**
  * Connects a single item row to the list.
  */
-export function DataListRows<TRenderItem>({descriptors}: DataListRowsProps<TRenderItem>) {
+export function DataListRows({descriptors}: DataListRowsProps) {
     const {attachDescriptors, markForIndex} = useDataListDescriptorContext()
 
     const id = React.useId()
