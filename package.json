@@ -8,15 +8,15 @@
   "homepage": "https://github.com/attio/react-data-list",
   "repository": "attio/react-data-list.git",
   "type": "module",
+  "main": "lib/index.js",
+  "source": "src/",
+  "react-native": "src/index.ts",
+  "types": "./lib/index.d.ts",
   "files": [
     "lib",
     "src"
   ],
-  "main": "lib/index.js",
   "module": "lib/index.cjs",
-  "react-native": "src/index.ts",
-  "source": "src/",
-  "types": "./lib/index.d.ts",
   "engines": {
     "bun": ">=1.2.21"
   },
