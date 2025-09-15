@@ -3,6 +3,7 @@ import type {
     DataListRenderListItem,
     DataListRenderListItemInfo,
     DataListRenderListItemInfoWithIndex,
+    ValueOfDescriptor as DataListValueOfDescriptor,
 } from "./data-list-types"
 import {DataList} from "./data-list"
 import {useDataListRendererContext} from "./data-list-renderer-context"
@@ -33,6 +34,9 @@ namespace ReactDataList {
     export type RenderListItemInfo<TRenderItem> = DataListRenderListItemInfo<TRenderItem>
     export type RenderListItemInfoWithIndex<TRenderItem> =
         DataListRenderListItemInfoWithIndex<TRenderItem>
+    // biome-ignore lint/suspicious/noExplicitAny: ignore
+    export type ValueOfDescriptor<TRenderItem extends DataListDescriptor<any>> =
+        DataListValueOfDescriptor<TRenderItem>
 }
 
 export {ReactDataList}

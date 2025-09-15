@@ -37,6 +37,15 @@ export interface DataListDescriptor<TRenderItem = any> {
 }
 
 /**
+ * Utility type to extract the TRenderItem type from UniversalListDescriptor.
+ */
+export type ValueOfDescriptor<T extends DataListDescriptor<any>> = T extends DataListDescriptor<
+    infer TRenderItem
+>
+    ? TRenderItem
+    : never
+
+/**
  * The shape of the item info passed into the render function of a row.
  */
 export interface DataListRenderListItemInfo<TRenderItem> {
