@@ -1,7 +1,7 @@
 {
   "private": false,
   "name": "@attio/react-data-list",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": "Braden Marshall <braden1996@hotmail.co.uk>",
   "license": "MIT",
   "bugs": "https://github.com/attio/react-data-list/issues",
@@ -9,17 +9,14 @@
   "repository": "attio/react-data-list.git",
   "type": "module",
   "files": [
-    "lib"
+    "lib",
+    "src"
   ],
-  "exports": {
-    "./package.json": "./package.json",
-    ".": {
-      "types": "./lib/index.d.ts",
-      "import": "./lib/index.js",
-      "react-native": "./lib/index.js",
-      "default": "./lib/index.cjs"
-    }
-  },
+  "main": "lib/index.js",
+  "module": "lib/index.cjs",
+  "react-native": "src/index.tsx",
+  "source": "src/",
+  "types": "./lib/index.d.ts",
   "engines": {
     "bun": ">=1.2.21"
   },
@@ -56,7 +53,7 @@
     "typescript": "~5.9.2"
   },
   "peerDependencies": {
-    "@attio/react-descendants": "^1.0.0",
+    "@attio/react-descendants": "^1.0.1",
     "@types/react": "*",
     "react": "*"
   },

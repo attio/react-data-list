@@ -20,7 +20,7 @@
         "typescript": "~5.9.2",
       },
       "peerDependencies": {
-        "@attio/react-descendants": "^1.0.0",
+        "@attio/react-descendants": "^1.0.1",
         "@types/react": "*",
         "react": "*",
       },
