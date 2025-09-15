@@ -3,7 +3,7 @@ import type {
     DataListRenderListItem,
     DataListRenderListItemInfo,
     DataListRenderListItemInfoWithIndex,
-    ValueOfDescriptor as DataListValueOfDescriptor,
+    DataListValueOfDescriptor,
 } from "./data-list-types"
 import {DataList} from "./data-list"
 import {useDataListRendererContext} from "./data-list-renderer-context"
