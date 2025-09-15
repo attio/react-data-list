@@ -1,7 +1,7 @@
 {
   "private": false,
   "name": "@attio/react-data-list",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "author": "Braden Marshall <braden1996@hotmail.co.uk>",
   "license": "MIT",
   "bugs": "https://github.com/attio/react-data-list/issues",
@@ -14,7 +14,7 @@
   ],
   "main": "lib/index.js",
   "module": "lib/index.cjs",
-  "react-native": "src/index.tsx",
+  "react-native": "src/index.ts",
   "source": "src/",
   "types": "./lib/index.d.ts",
   "engines": {
