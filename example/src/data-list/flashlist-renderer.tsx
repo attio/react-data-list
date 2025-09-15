@@ -1,9 +1,7 @@
 import {FlashList, type FlashListProps} from "@shopify/flash-list"
 import * as React from "react"
 
-import type ReactDataList from "@attio/react-data-list"
-
-import {useDataListRendererContext} from "../../../src/data-list-renderer-context"
+import ReactDataList from "@attio/react-data-list"
 
 interface FlashListRendererProps<TRenderItem>
     extends Omit<
@@ -12,7 +10,7 @@ interface FlashListRendererProps<TRenderItem>
     > {}
 
 export function FlashListRenderer<TRenderItem>(props: FlashListRendererProps<TRenderItem>) {
-    const {data, rootRenderItem, renderEmpty, getItemId} = useDataListRendererContext()
+    const {data, rootRenderItem, renderEmpty, getItemId} = ReactDataList.useRendererContext()
 
     const getItemType = React.useCallback(
         (item: ReactDataList.RenderListItemInfo<TRenderItem>) => item.descriptor.recyclerType,

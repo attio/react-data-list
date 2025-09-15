@@ -5,6 +5,7 @@ import type {
     DataListRenderListItemInfoWithIndex,
 } from "./data-list-types"
 import {DataList} from "./data-list"
+import {useDataListRendererContext} from "./data-list-renderer-context"
 import {DataListRow} from "./data-list-row"
 import {DataListRows} from "./data-list-rows"
 import {DataListFetchable} from "./templates/fetchable/data-list-fetchable"
@@ -18,11 +19,13 @@ const ReactDataList = DataList as typeof DataList & {
     Row: typeof DataListRow
     Rows: typeof DataListRows
     Fetchable: typeof DataListFetchable
+    useRendererContext: typeof useDataListRendererContext
 }
 
 ReactDataList.Row = DataListRow
 ReactDataList.Rows = DataListRows
 ReactDataList.Fetchable = DataListFetchable
+ReactDataList.useRendererContext = useDataListRendererContext
 
 namespace ReactDataList {
     export type Descriptor<TRenderItem> = DataListDescriptor<TRenderItem>

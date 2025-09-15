@@ -5,7 +5,6 @@ import {type StyleProp, StyleSheet} from "react-native"
 
 import {ReactDataList} from "@attio/react-data-list"
 
-import type {DataListDescriptor} from "../../../../../src/data-list-types"
 import type {MiddleEarthPlace} from "../../../data/middle-earth-places"
 import type {LayoutViewStyle} from "../../../style/layout-view-style"
 import {FlashListRenderer} from "../../../data-list/flashlist-renderer"
@@ -31,7 +30,7 @@ export default function MiddleEarthPlacesDataList({
     const descriptors = React.useMemo(
         () =>
             placeItems.map(
-                (placeItem): DataListDescriptor<MiddleEarthPlace> => ({
+                (placeItem): ReactDataList.Descriptor<MiddleEarthPlace> => ({
                     id: placeItem.name,
                     item: placeItem,
                     recyclerType: "list-item",
